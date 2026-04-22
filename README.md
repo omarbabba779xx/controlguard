@@ -4,6 +4,37 @@ Automated security control validation lab for Windows, Linux, web, Microsoft Ent
 
 `controlguard` est un outil Python qui verifie automatiquement des controles de securite sur une machine, une cible web ou une plateforme IAM, puis produit un rapport exploitable par un analyste, une pipeline CI/CD, ou un exercice de hardening.
 
+## Architecture visuelle
+
+```mermaid
+flowchart LR
+    A["CLI<br/>scan / validate / compare"] --> B["Scan Engine"]
+    B --> C["Profiles + Config Validation"]
+    B --> D["Control Registry"]
+    D --> E["Windows Checks"]
+    D --> F["Linux Checks"]
+    D --> G["Web Checks"]
+    D --> H["IAM Checks"]
+    H --> I["Microsoft Graph"]
+    H --> J["Okta"]
+    B --> K["Scoring + Compliance Rollups"]
+    K --> L["Markdown / JSON / HTML / CSV / SARIF"]
+    L --> M["Analyst Review / CI / GitHub / Dashboards"]
+```
+
+## Workflow visuel
+
+```mermaid
+flowchart TD
+    A["Load profile"] --> B["Validate configuration"]
+    B --> C["Run applicable controls"]
+    C --> D["Collect evidence"]
+    D --> E["Compute strict score"]
+    E --> F["Roll up by framework"]
+    F --> G["Render report"]
+    G --> H["Compare runs over time"]
+```
+
 ## Pourquoi ce projet
 
 Le projet adresse quatre usages clairs :
@@ -143,6 +174,15 @@ Pre-requis recommandes :
 - `html` : executive summary + technical details
 - `csv` : export tabulaire
 - `sarif` : integration security tooling / code scanning
+
+## Ce que le rapport HTML montre
+
+- score ring global
+- distribution visuelle des statuts
+- distribution visuelle des severites
+- cartes par framework
+- vue des blockers
+- table findings + details techniques repliables
 
 ## Ce qui rend le projet solide pour un portfolio cyber
 
