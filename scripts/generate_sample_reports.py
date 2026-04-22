@@ -1,13 +1,18 @@
 from __future__ import annotations
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from controlguard.comparison import compare_report_payloads, render_compare_html, render_compare_json, render_compare_markdown
+from controlguard.comparison import (
+    compare_report_payloads,
+    render_compare_html,
+    render_compare_json,
+    render_compare_markdown,
+)
 from controlguard.models import ControlResult, ControlStatus, FrameworkSummary, ScanReport, ScanSummary, Severity
 from controlguard.reporting import render_html, render_json, render_sarif
 

@@ -54,9 +54,7 @@ def _validate_control(control: ControlDefinition, seen_ids: set[str]) -> list[st
         platform for platform in control.supported_platforms if platform not in SUPPORTED_PLATFORM_VALUES
     ]
     if invalid_platforms:
-        errors.append(
-            f"Control '{control.id}' has unsupported platform values: {', '.join(sorted(invalid_platforms))}"
-        )
+        errors.append(f"Control '{control.id}' has unsupported platform values: {', '.join(sorted(invalid_platforms))}")
 
     for param_name in spec["required_params"]:
         if param_name not in control.params:

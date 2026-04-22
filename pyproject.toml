@@ -7,7 +7,7 @@ name = "controlguard"
 version = "0.1.0"
 description = "Security Control Validation Lab for automated control verification."
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 authors = [
   { name = "Omar Babba" }
 ]
@@ -23,6 +23,7 @@ keywords = [
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX :: Linux",
@@ -30,6 +31,15 @@ classifiers = [
   "Topic :: System :: Systems Administration",
 ]
 dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "bandit[toml]>=1.8,<2",
+  "black>=24.10,<26",
+  "coverage[toml]>=7.6,<8",
+  "mypy>=1.13,<2",
+  "ruff>=0.8,<1",
+]
 
 [project.urls]
 Homepage = "https://github.com/omarbabba779xx/controlguard"
@@ -41,3 +51,41 @@ controlguard = "controlguard.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["controlguard*"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/generate_sample_reports.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["controlguard"]
+ignore_missing_imports = false
+pretty = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_unused_configs = true
+exclude = ["^tests/", "^docs/", "^scripts/"]
+
+[tool.coverage.run]
+branch = true
+source = ["controlguard"]
+
+[tool.coverage.report]
+fail_under = 58
+show_missing = true
+skip_covered = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs", "scripts"]
+skips = ["B104", "B105", "B310", "B404", "B603"]

@@ -25,8 +25,11 @@ def compare_report_payloads(baseline: dict, current: dict) -> dict:
         after_status = after["status"] if after else "missing"
         if before_status == after_status:
             continue
-        title = (after or before).get("title", control_id)
-        severity = (after or before).get("severity", "unknown")
+        source = after if after is not None else before
+        if source is None:
+            continue
+        title = source.get("title", control_id)
+        severity = source.get("severity", "unknown")
         control_changes.append(
             {
                 "control_id": control_id,
@@ -107,7 +110,15 @@ def render_compare_markdown(comparison: dict) -> str:
             f"| `{change['control_id']}` | `{change['severity']}` | `{change['baseline_status']}` | `{change['current_status']}` |"
         )
 
-    lines.extend(["", "## Framework changes", "", "| Framework | Baseline score | Current score | Delta |", "| --- | --- | --- | --- |"])
+    lines.extend(
+        [
+            "",
+            "## Framework changes",
+            "",
+            "| Framework | Baseline score | Current score | Delta |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
     for change in comparison["framework_changes"]:
         lines.append(
             f"| `{change['framework']}` | `{change['baseline_score']}` | `{change['current_score']}` | `{change['delta']}` |"

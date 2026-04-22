@@ -134,12 +134,16 @@ def _parse_timestamp(value: object) -> datetime | None:
 
 
 def _max_timestamp(admin_rows: list[dict]) -> str | None:
-    timestamps = [row.get("lastUpdatedDateTime") for row in admin_rows if row.get("lastUpdatedDateTime")]
+    timestamps = [
+        str(row.get("lastUpdatedDateTime")) for row in admin_rows if row.get("lastUpdatedDateTime") is not None
+    ]
     return max(timestamps) if timestamps else None
 
 
 def _min_timestamp(admin_rows: list[dict]) -> str | None:
-    timestamps = [row.get("lastUpdatedDateTime") for row in admin_rows if row.get("lastUpdatedDateTime")]
+    timestamps = [
+        str(row.get("lastUpdatedDateTime")) for row in admin_rows if row.get("lastUpdatedDateTime") is not None
+    ]
     return min(timestamps) if timestamps else None
 
 
@@ -189,6 +193,7 @@ def _result(
         evidence_source=control.evidence_source,
         supported_platforms=control.supported_platforms,
         references=control.references or GRAPH_REFERENCES,
+        frameworks=control.frameworks,
         tags=control.tags,
         evidence=evidence,
     )

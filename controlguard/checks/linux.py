@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 from ..models import ControlDefinition, ControlResult, ControlStatus, LabConfig
 from ..runtime import CheckExecutionError, UnsupportedPlatformError, ensure_linux, run_command
@@ -107,7 +107,9 @@ def run_linux_ssh_password_auth_disabled_check(control: ControlDefinition, confi
         for config_file in config_files:
             if not config_file.exists():
                 continue
-            for line_number, line in enumerate(config_file.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1):
+            for line_number, line in enumerate(
+                config_file.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1
+            ):
                 stripped = line.strip()
                 if not stripped or stripped.startswith("#"):
                     continue

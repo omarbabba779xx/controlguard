@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from ..models import ControlDefinition, ControlResult, ControlStatus, LabConfig
 
-
 _MISSING = object()
 
 
 def run_manual_assertion(control: ControlDefinition, config: LabConfig) -> ControlResult:
-    evidence_key = control.params.get("evidence_key")
+    evidence_key = str(control.params.get("evidence_key"))
     expected = control.params.get("expected", True)
     actual = config.manual_evidence.get(evidence_key, _MISSING)
 

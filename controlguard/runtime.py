@@ -51,9 +51,7 @@ def run_command(command: list[str], timeout_seconds: int = 15) -> str:
             timeout=timeout_seconds,
         )
     except subprocess.TimeoutExpired as exc:
-        raise CheckExecutionError(
-            f"Command timed out after {timeout_seconds} seconds: {' '.join(command)}"
-        ) from exc
+        raise CheckExecutionError(f"Command timed out after {timeout_seconds} seconds: {' '.join(command)}") from exc
 
     if completed.returncode != 0:
         stderr = completed.stderr.strip() or completed.stdout.strip()

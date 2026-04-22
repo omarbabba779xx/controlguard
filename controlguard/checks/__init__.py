@@ -157,9 +157,7 @@ def _validate_okta_admin_mfa(control) -> list[str]:
     has_access_token = bool(control.params.get("access_token") or control.params.get("access_token_env"))
     has_api_token = bool(control.params.get("api_token") or control.params.get("api_token_env"))
     if not has_access_token and not has_api_token:
-        errors.append(
-            f"Control '{control.id}' must define access_token/access_token_env or api_token/api_token_env."
-        )
+        errors.append(f"Control '{control.id}' must define access_token/access_token_env or api_token/api_token_env.")
 
     try:
         minimum_admin_count = int(control.params.get("minimum_admin_count", 1))

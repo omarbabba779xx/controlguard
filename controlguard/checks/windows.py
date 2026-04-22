@@ -43,8 +43,7 @@ def run_windows_event_log_check(control: ControlDefinition, config: LabConfig) -
     del config
     try:
         service = run_powershell_json(
-            "Get-Service -Name EventLog | "
-            "Select-Object Name,Status,StartType | ConvertTo-Json -Compress"
+            "Get-Service -Name EventLog | " "Select-Object Name,Status,StartType | ConvertTo-Json -Compress"
         )
     except UnsupportedPlatformError as exc:
         return _not_applicable_result(control, str(exc))
@@ -59,9 +58,11 @@ def run_windows_event_log_check(control: ControlDefinition, config: LabConfig) -
     return _result(
         control,
         ControlStatus.PASS if passes else ControlStatus.FAIL,
-        "Windows Event Log service is running and persistent."
-        if passes
-        else "Windows Event Log service is not running or not set to automatic startup.",
+        (
+            "Windows Event Log service is running and persistent."
+            if passes
+            else "Windows Event Log service is not running or not set to automatic startup."
+        ),
         {"service": service},
         "Set EventLog service to automatic start and ensure audit policies are enabled.",
     )
@@ -179,9 +180,11 @@ def run_windows_defender_check(control: ControlDefinition, config: LabConfig) ->
     return _result(
         control,
         ControlStatus.PASS if not failing_checks else ControlStatus.FAIL,
-        "Microsoft Defender core protections are enabled."
-        if not failing_checks
-        else "Microsoft Defender core protections are not fully enabled.",
+        (
+            "Microsoft Defender core protections are enabled."
+            if not failing_checks
+            else "Microsoft Defender core protections are not fully enabled."
+        ),
         {"defender_status": status, "failing_checks": failing_checks},
         "Enable Microsoft Defender Antivirus service and real-time protection.",
     )
@@ -226,9 +229,7 @@ def run_powershell_script_block_logging_check(control: ControlDefinition, config
     return _result(
         control,
         ControlStatus.PASS if enabled else ControlStatus.FAIL,
-        "PowerShell Script Block Logging is enabled."
-        if enabled
-        else "PowerShell Script Block Logging is not enabled.",
+        "PowerShell Script Block Logging is enabled." if enabled else "PowerShell Script Block Logging is not enabled.",
         {"script_block_logging": data},
         "Enable Script Block Logging via Group Policy for richer command audit trails.",
     )

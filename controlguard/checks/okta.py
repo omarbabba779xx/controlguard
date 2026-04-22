@@ -23,8 +23,7 @@ def run_okta_admin_mfa_check(control: ControlDefinition, config: LabConfig) -> C
     del config
     minimum_admin_count = int(control.params.get("minimum_admin_count", 1))
     allowed_factor_types = {
-        str(item).strip().lower()
-        for item in control.params.get("allowed_factor_types", DEFAULT_ALLOWED_FACTOR_TYPES)
+        str(item).strip().lower() for item in control.params.get("allowed_factor_types", DEFAULT_ALLOWED_FACTOR_TYPES)
     }
 
     try:
@@ -58,8 +57,8 @@ def run_okta_admin_mfa_check(control: ControlDefinition, config: LabConfig) -> C
             },
         )
 
-    compliant_admins = []
-    non_compliant_admins = []
+    compliant_admins: list[dict[str, object]] = []
+    non_compliant_admins: list[dict[str, object]] = []
     for admin_user in admin_users:
         user_id = admin_user.get("id")
         if not user_id:
@@ -80,7 +79,9 @@ def run_okta_admin_mfa_check(control: ControlDefinition, config: LabConfig) -> C
             "id": admin_user.get("id"),
             "login": _extract_login(admin_user),
             "strong_factors": strong_factors,
-            "factor_types_seen": sorted({_factor_type(factor) for factor in factors if _factor_type(factor)}),
+            "factor_types_seen": sorted(
+                {factor_type for factor in factors for factor_type in [_factor_type(factor)] if factor_type is not None}
+            ),
         }
         if strong_factors:
             compliant_admins.append(summary)

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import platform
 from collections import Counter
 from dataclasses import replace
 from datetime import datetime, timezone
-import platform
 
 from .checks import CHECKS
 from .models import ControlResult, ControlStatus, FrameworkSummary, LabConfig, ScanReport, ScanSummary

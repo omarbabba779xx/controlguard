@@ -84,7 +84,9 @@ def render_markdown(report: ScanReport) -> str:
         "",
     ]
     if report.summary.blocking_controls:
-        lines.append(f"- Blocking controls: {', '.join(f'`{control_id}`' for control_id in report.summary.blocking_controls)}")
+        lines.append(
+            f"- Blocking controls: {', '.join(f'`{control_id}`' for control_id in report.summary.blocking_controls)}"
+        )
         lines.append("")
 
     if report.summary.frameworks:
@@ -579,7 +581,12 @@ def render_sarif(report: ScanReport) -> str:
 
 
 def _render_framework_markdown(frameworks: dict[str, FrameworkSummary]) -> list[str]:
-    lines = ["## Framework summary", "", "| Framework | Score | Applicable | Compliant | Blocking controls |", "| --- | --- | --- | --- | --- |"]
+    lines = [
+        "## Framework summary",
+        "",
+        "| Framework | Score | Applicable | Compliant | Blocking controls |",
+        "| --- | --- | --- | --- | --- |",
+    ]
     for framework, summary in sorted(frameworks.items()):
         blockers = ", ".join(summary.blocking_controls) if summary.blocking_controls else "-"
         lines.append(
@@ -755,8 +762,7 @@ def _report_to_dict(report: ScanReport) -> dict:
     payload = asdict(report)
     payload["results"] = [_result_to_dict(result) for result in report.results]
     payload["summary"]["frameworks"] = {
-        framework: asdict(summary)
-        for framework, summary in report.summary.frameworks.items()
+        framework: asdict(summary) for framework, summary in report.summary.frameworks.items()
     }
     return payload
 

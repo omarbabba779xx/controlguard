@@ -127,7 +127,9 @@ def _build_result(
     message: str,
     evidence: dict,
 ) -> ControlResult:
-    remediation = control.remediation or "Configure the missing security headers in the reverse proxy or application layer."
+    remediation = (
+        control.remediation or "Configure the missing security headers in the reverse proxy or application layer."
+    )
     return ControlResult(
         control_id=control.id,
         title=control.title,

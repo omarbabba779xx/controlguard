@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
 import os
+from collections.abc import Mapping
+from dataclasses import dataclass
 from typing import Any
 from urllib import error, parse, request
 
@@ -54,7 +55,7 @@ class MicrosoftGraphSettings:
             client_secret_env=_clean_optional(params.get("client_secret_env")),
         )
 
-    def resolve_access_token(self, env: dict[str, str] | None = None) -> tuple[str, str]:
+    def resolve_access_token(self, env: Mapping[str, str] | None = None) -> tuple[str, str]:
         environment = env or os.environ
         explicit_token = self.access_token or _read_env(environment, self.access_token_env)
         if explicit_token:
@@ -75,6 +76,8 @@ class MicrosoftGraphSettings:
                 "Microsoft Graph connector is missing credentials. "
                 f"Set {', '.join(missing)} or provide a pre-acquired access token."
             )
+        if tenant is None or client_id is None or client_secret is None:
+            raise MicrosoftGraphConfigurationError("Microsoft Graph connector credentials resolved to empty values.")
 
         token = _request_client_credentials_token(
             authority_host=self.authority_host,
@@ -93,7 +96,7 @@ class MicrosoftGraphClient:
     def list_user_registration_details(self) -> tuple[list[dict[str, Any]], str]:
         access_token, auth_mode = self.settings.resolve_access_token()
         results: list[dict[str, Any]] = []
-        next_url = f"{self.settings.graph_base_url}/reports/authenticationMethods/userRegistrationDetails"
+        next_url: str | None = f"{self.settings.graph_base_url}/reports/authenticationMethods/userRegistrationDetails"
         while next_url:
             page = _request_json(
                 method="GET",
@@ -102,7 +105,8 @@ class MicrosoftGraphClient:
                 timeout_seconds=self.settings.timeout_seconds,
             )
             results.extend(_as_list(page.get("value")))
-            next_url = page.get("@odata.nextLink")
+            next_link = page.get("@odata.nextLink")
+            next_url = str(next_link) if next_link else None
         return results, auth_mode
 
 
@@ -183,7 +187,7 @@ def _clean_optional(value: Any) -> str | None:
     return cleaned or None
 
 
-def _read_env(environment: dict[str, str], env_name: str | None) -> str | None:
+def _read_env(environment: Mapping[str, str], env_name: str | None) -> str | None:
     if not env_name:
         return None
     return _clean_optional(environment.get(env_name))

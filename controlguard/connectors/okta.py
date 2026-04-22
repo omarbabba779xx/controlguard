@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
 import os
+from collections.abc import Mapping
+from dataclasses import dataclass
 from typing import Any
 from urllib import error, parse, request
 
@@ -45,7 +46,7 @@ class OktaSettings:
             api_token_env=_clean_optional(params.get("api_token_env")),
         )
 
-    def resolve_auth_header(self, env: dict[str, str] | None = None) -> tuple[str, str]:
+    def resolve_auth_header(self, env: Mapping[str, str] | None = None) -> tuple[str, str]:
         environment = env or os.environ
         access_token = self.access_token or _read_env(environment, self.access_token_env)
         if access_token:
@@ -64,7 +65,7 @@ class OktaClient:
 
     def list_admin_users(self) -> tuple[list[dict[str, Any]], str]:
         auth_header, auth_mode = self.settings.resolve_auth_header()
-        next_url = f"{self.settings.okta_domain}/api/v1/iam/assignees/users?limit=200"
+        next_url: str | None = f"{self.settings.okta_domain}/api/v1/iam/assignees/users?limit=200"
         users: list[dict[str, Any]] = []
         while next_url:
             payload, response_headers = _request_json(
@@ -142,7 +143,7 @@ def _clean_optional(value: Any) -> str | None:
     return cleaned or None
 
 
-def _read_env(environment: dict[str, str], env_name: str | None) -> str | None:
+def _read_env(environment: Mapping[str, str], env_name: str | None) -> str | None:
     if not env_name:
         return None
     return _clean_optional(environment.get(env_name))

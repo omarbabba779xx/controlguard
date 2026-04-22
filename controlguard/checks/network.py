@@ -148,7 +148,9 @@ def _build_result(
     message: str,
     evidence: dict,
 ) -> ControlResult:
-    remediation = control.remediation or "Disable the service, bind it to loopback only, or restrict access with a firewall."
+    remediation = (
+        control.remediation or "Disable the service, bind it to loopback only, or restrict access with a firewall."
+    )
     return ControlResult(
         control_id=control.id,
         title=control.title,
