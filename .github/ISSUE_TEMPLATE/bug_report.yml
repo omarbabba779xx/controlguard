@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a defect in a control, connector, report, or CLI flow
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a bug. Please include enough detail to reproduce the issue.
+  - type: input
+    id: area
+    attributes:
+      label: Affected area
+      placeholder: windows check, graph connector, html report, compare command
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, profile, and any relevant runtime context

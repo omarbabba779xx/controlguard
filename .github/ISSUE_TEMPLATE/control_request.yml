@@ -1,0 +1,45 @@
+name: New control request
+description: Request a new validation control for a host, cloud, web, or IAM surface
+title: "[Control] "
+labels: ["enhancement", "control"]
+body:
+  - type: input
+    id: control_name
+    attributes:
+      label: Control name
+      placeholder: linux-time-sync, aws-root-mfa, tls-min-version
+    validations:
+      required: true
+  - type: dropdown
+    id: family
+    attributes:
+      label: Control family
+      options:
+        - Windows
+        - Linux
+        - Web
+        - Network
+        - Microsoft Entra
+        - Okta
+        - AWS
+        - Azure
+        - GCP
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Security rationale
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence source
+      description: API, registry, filesystem, shell command, config file, or manual source
+  - type: textarea
+    id: framework_mapping
+    attributes:
+      label: Framework mapping
+      description: CIS, NIST, ISO 27001, OWASP, or internal policy references

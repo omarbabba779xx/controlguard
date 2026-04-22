@@ -95,6 +95,12 @@ pip install -e .
 - `entra-admin-mfa` : MFA admin via Microsoft Graph
 - `okta-admin-mfa` : MFA admin via Okta
 
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Roadmap](ROADMAP.md)
+- [Release notes v0.1.0](docs/RELEASE_NOTES_v0.1.0.md)
+
 ## Commandes utiles
 
 Lancer le profil principal :
