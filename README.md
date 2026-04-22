@@ -37,7 +37,41 @@ flowchart TD
 
 ## Apercu visuel
 
-![controlguard report preview](https://github.com/omarbabba779xx/Controlguard/blob/main/docs/assets/report-preview-card.png?raw=1)
+### Sample audit snapshot
+
+| Metric | Example |
+| --- | --- |
+| Global score | `61.5%` |
+| Posture | `weak` |
+| Blocking controls | `windows-defender-running`, `security-headers` |
+| Applicable controls | `4/4` |
+| Output formats | `HTML`, `JSON`, `CSV`, `SARIF`, `Markdown` |
+
+### Sample status distribution
+
+| Status | Count | Visual |
+| --- | --- | --- |
+| `pass` | `2` | `██████████` |
+| `fail` | `2` | `██████████` |
+| `warn` | `0` | `-` |
+| `error` | `0` | `-` |
+| `evidence_missing` | `0` | `-` |
+| `not_applicable` | `0` | `-` |
+
+### Sample framework summary
+
+| Framework | Score | Compliant |
+| --- | --- | --- |
+| `CIS Controls v8` | `70.0%` | `false` |
+| `NIST CSF 2.0` | `50.0%` | `false` |
+| `OWASP` | `0.0%` | `false` |
+
+### Live examples in the repo
+
+- [sample-report.html](docs/samples/sample-report.html)
+- [sample-report.json](docs/samples/sample-report.json)
+- [sample-report.sarif](docs/samples/sample-report.sarif)
+- [sample-compare.html](docs/samples/sample-compare.html)
 
 ## Pourquoi ce projet
 
