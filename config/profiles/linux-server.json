@@ -1,0 +1,49 @@
+{
+  "lab_name": "Linux Server Hardening",
+  "description": "Profil integre pour verifier plusieurs controles de hardening de base sur un serveur Linux.",
+  "manual_evidence": {},
+  "controls": [
+    {
+      "id": "linux-firewall-enabled",
+      "title": "Pare-feu Linux actif",
+      "type": "linux_firewall_enabled",
+      "severity": "critical",
+      "required": true,
+      "supported_platforms": ["linux"],
+      "evidence_source": "runtime",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "linux-auditd-running",
+      "title": "auditd actif",
+      "type": "linux_auditd_running",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["linux"],
+      "evidence_source": "runtime",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "linux-ssh-password-auth-disabled",
+      "title": "SSH password auth desactivee",
+      "type": "linux_ssh_password_auth_disabled",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["linux"],
+      "evidence_source": "filesystem",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "linux-sensitive-ports",
+      "title": "Ports sensibles non exposes",
+      "type": "sensitive_ports_exposed",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["linux", "network"],
+      "evidence_source": "runtime",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"],
+      "ports": [21, 23, 3389, 445],
+      "ignore_loopback": true
+    }
+  ]
+}

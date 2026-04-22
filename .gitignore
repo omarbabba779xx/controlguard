@@ -1,0 +1,11 @@
+.omx/
+.venv/
+venv/
+__pycache__/
+*.pyc
+reports/
+.pytest_cache/
+.coverage
+dist/
+build/
+*.egg-info/

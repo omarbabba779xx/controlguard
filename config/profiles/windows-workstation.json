@@ -1,0 +1,77 @@
+{
+  "lab_name": "Windows Workstation Hardening",
+  "description": "Profil integre pour auditer les controles principaux de hardening sur un poste Windows.",
+  "manual_evidence": {},
+  "controls": [
+    {
+      "id": "win-firewall-enabled",
+      "title": "Pare-feu Windows actif",
+      "type": "windows_firewall_enabled",
+      "severity": "critical",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "powershell",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "windows-defender-running",
+      "title": "Defender actif",
+      "type": "windows_defender_running",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "powershell",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "uac-enabled",
+      "title": "UAC active",
+      "type": "windows_uac_enabled",
+      "severity": "medium",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "registry",
+      "tags": ["CIS", "NIST-CSF"]
+    },
+    {
+      "id": "script-block-logging",
+      "title": "PowerShell Script Block Logging actif",
+      "type": "powershell_script_block_logging",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "registry",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "rdp-disabled",
+      "title": "RDP desactive",
+      "type": "rdp_disabled",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "registry",
+      "tags": ["CIS", "NIST-CSF"]
+    },
+    {
+      "id": "smbv1-disabled",
+      "title": "SMBv1 desactive",
+      "type": "smbv1_disabled",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["windows"],
+      "evidence_source": "powershell",
+      "tags": ["CIS", "NIST-CSF", "ISO27001"]
+    },
+    {
+      "id": "secure-boot-enabled",
+      "title": "Secure Boot actif",
+      "type": "secure_boot_enabled",
+      "severity": "medium",
+      "required": false,
+      "supported_platforms": ["windows"],
+      "evidence_source": "powershell",
+      "tags": ["CIS", "NIST-CSF"]
+    }
+  ]
+}

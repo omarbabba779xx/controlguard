@@ -1,0 +1,30 @@
+{
+  "lab_name": "Microsoft Entra Admin MFA",
+  "description": "Profil integre pour verifier via Microsoft Graph que les comptes admin actifs sont prets pour la MFA.",
+  "manual_evidence": {},
+  "controls": [
+    {
+      "id": "admin-mfa",
+      "title": "MFA active pour les acces admin",
+      "type": "microsoft_graph_admin_mfa",
+      "severity": "critical",
+      "required": true,
+      "supported_platforms": ["cloud"],
+      "evidence_source": "graph",
+      "description": "Verifie via Microsoft Graph que les comptes admin actifs satisfont l'exigence MFA.",
+      "rationale": "Les acces privilegies sans MFA restent un risque majeur.",
+      "tags": ["Identity", "MFA", "Compliance", "Microsoft Graph"],
+      "frameworks": {
+        "CIS Controls v8": ["6 Access Control Management"],
+        "NIST CSF 2.0": ["PR.AA Identity Management, Authentication, and Access Control"],
+        "ISO 27001:2022": ["5.17 Authentication information"]
+      },
+      "mfa_requirement": "capable",
+      "minimum_admin_count": 1,
+      "tenant_env": "CONTROLGUARD_GRAPH_TENANT_ID",
+      "client_id_env": "CONTROLGUARD_GRAPH_CLIENT_ID",
+      "client_secret_env": "CONTROLGUARD_GRAPH_CLIENT_SECRET",
+      "remediation": "Configurer Microsoft Graph avec AuditLog.Read.All, consentement admin, puis renseigner les variables d'environnement CONTROLGUARD_GRAPH_TENANT_ID, CONTROLGUARD_GRAPH_CLIENT_ID et CONTROLGUARD_GRAPH_CLIENT_SECRET."
+    }
+  ]
+}

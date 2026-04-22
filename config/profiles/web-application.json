@@ -1,0 +1,33 @@
+{
+  "lab_name": "Web Application Security Headers",
+  "description": "Profil integre pour verifier les headers de securite et la couche HTTPS d'une application web.",
+  "manual_evidence": {},
+  "controls": [
+    {
+      "id": "security-headers",
+      "title": "Headers de securite conformes",
+      "type": "security_headers",
+      "severity": "high",
+      "required": true,
+      "supported_platforms": ["web"],
+      "evidence_source": "http",
+      "tags": ["OWASP", "NIST-CSF", "ISO27001"],
+      "url": "https://example.com",
+      "required_headers": [
+        "strict-transport-security",
+        "content-security-policy",
+        "x-content-type-options",
+        "x-frame-options"
+      ],
+      "header_rules": {
+        "x-content-type-options": "nosniff",
+        "x-frame-options": {
+          "one_of": ["DENY", "SAMEORIGIN"]
+        },
+        "strict-transport-security": {
+          "contains": ["max-age="]
+        }
+      }
+    }
+  ]
+}

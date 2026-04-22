@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "controlguard"
+version = "0.1.0"
+description = "Security Control Validation Lab for automated control verification."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "OpenAI Codex" }
+]
+dependencies = []
+
+[project.scripts]
+controlguard = "controlguard.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["controlguard*"]

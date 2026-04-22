@@ -1,0 +1,27 @@
+{
+  "lab_name": "Okta Admin MFA",
+  "description": "Profil integre pour verifier que les comptes admins Okta ont au moins un facteur MFA fort.",
+  "manual_evidence": {},
+  "controls": [
+    {
+      "id": "okta-admin-mfa",
+      "title": "MFA active pour les admins Okta",
+      "type": "okta_admin_mfa",
+      "severity": "critical",
+      "required": true,
+      "supported_platforms": ["cloud"],
+      "evidence_source": "okta",
+      "description": "Verifie que les utilisateurs avec role admin Okta ont un facteur MFA fort actif.",
+      "rationale": "Les admins Okta sans MFA forte augmentent fortement le risque de compromission du tenant IAM.",
+      "tags": ["Identity", "MFA", "Compliance", "Okta"],
+      "frameworks": {
+        "CIS Controls v8": ["6 Access Control Management"],
+        "NIST CSF 2.0": ["PR.AA Identity Management, Authentication, and Access Control"],
+        "ISO 27001:2022": ["5.17 Authentication information"]
+      },
+      "okta_domain": "https://example.okta.com",
+      "access_token_env": "CONTROLGUARD_OKTA_ACCESS_TOKEN",
+      "minimum_admin_count": 1
+    }
+  ]
+}
