@@ -9,9 +9,32 @@ description = "Security Control Validation Lab for automated control verificatio
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [
-  { name = "OpenAI Codex" }
+  { name = "Omar Babba" }
+]
+keywords = [
+  "security",
+  "compliance",
+  "hardening",
+  "audit",
+  "okta",
+  "microsoft-graph",
+  "security-validation",
+  "cybersecurity",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Topic :: Security",
+  "Topic :: System :: Systems Administration",
 ]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/omarbabba779xx/controlguard"
+Repository = "https://github.com/omarbabba779xx/controlguard"
+Issues = "https://github.com/omarbabba779xx/controlguard/issues"
 
 [project.scripts]
 controlguard = "controlguard.cli:main"
