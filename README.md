@@ -35,9 +35,7 @@ flowchart TD
     G --> H["Compare runs over time"]
 ```
 
-## Apercu visuel
-
-### Sample audit snapshot
+## Quick audit snapshot
 
 | Metric | Example |
 | --- | --- |
@@ -47,7 +45,7 @@ flowchart TD
 | Applicable controls | `4/4` |
 | Output formats | `HTML`, `JSON`, `CSV`, `SARIF`, `Markdown` |
 
-### Sample status distribution
+## Sample status distribution
 
 | Status | Count | Visual |
 | --- | --- | --- |
@@ -58,7 +56,7 @@ flowchart TD
 | `evidence_missing` | `0` | `-` |
 | `not_applicable` | `0` | `-` |
 
-### Sample framework summary
+## Sample framework summary
 
 | Framework | Score | Compliant |
 | --- | --- | --- |
@@ -66,7 +64,7 @@ flowchart TD
 | `NIST CSF 2.0` | `50.0%` | `false` |
 | `OWASP` | `0.0%` | `false` |
 
-### Live examples in the repo
+## Live examples in the repo
 
 - [sample-report.html](docs/samples/sample-report.html)
 - [sample-report.json](docs/samples/sample-report.json)
@@ -116,7 +114,7 @@ Le projet adresse quatre usages clairs :
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 pip install -e .
 ```
 
