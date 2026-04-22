@@ -37,7 +37,7 @@ flowchart TD
 
 ## Apercu visuel
 
-![controlguard report preview](docs/assets/report-preview.svg)
+![controlguard report preview](docs/assets/report-preview.png)
 
 ## Pourquoi ce projet
 
